@@ -7,12 +7,16 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="carousel-container">
-    <img id="carousel-image" src="" alt="carousel image" />
-    <button id="prev">prev</button>
-    <button id="next">next</button>
-  </div>
-
+    <div class="carousel-container">
+        <div class="carousel-track" id="carousel-track">
+        <img src="https://picsum.photos/id/100/500/300" alt="">
+        <img src="https://picsum.photos/id/101/500/300" alt="">
+        <img src="https://picsum.photos/id/102/500/300" alt="">
+        </div>
+        <button class="prev-button" onclick="movePrev()">Prev</button>
+  <button class="next-button" onclick="moveNext()">Next</button>
+    </div>
+    
   <script src="script.js"></script>
 </body>
 </html>
