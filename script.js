@@ -1,28 +1,36 @@
-const images = [
-  "https://picsum.photos/id/100/500/300",
-  "https://picsum.photos/id/101/500/300",
-  "https://picsum.photos/id/102/500/300",
-  "https://picsum.photos/id/103/500/300"
-];
+const track = document.getElementById('carousel-track');
+        let isSliding=false;
 
-let currentIndex = 0;
-const imageElement = document.getElementById("carousel-image");
-const nextBtn = document.getElementById("next");
-const prevBtn = document.getElementById("prev");
+        
+  function moveNext() {
+    if (isSliding) return;
+    isSliding = true;
 
-imageElement.src = images[currentIndex];
+    track.style.transition = 'transform 0.5s ease-in-out';
+    track.style.transform = 'translateX(-500px)';
 
-nextBtn.addEventListener("click", () => {
-  currentIndex = (currentIndex + 1) % images.length;
-imageElement.src = images[currentIndex];
-});
+    setTimeout(() => {
+      track.appendChild(track.children[0]);
+      track.style.transition = 'none';
+      track.style.transform = 'translateX(0)';
+      isSliding = false;
+    }, 500);
+  }
 
-prevBtn.addEventListener("click", () => {
-  currentIndex = (currentIndex - 1 + images.length) % images.length;
-imageElement.src = images[currentIndex];
-});
+  function movePrev() {
+    if (isSliding) return;
+    isSliding = true;
 
-setInterval(() => {
-  currentIndex = (currentIndex + 1) % images.length;
-imageElement.src = images[currentIndex];
-}, 3000);
+    track.insertBefore(track.lastElementChild, track.firstElementChild);
+    track.style.transition = 'none';
+    track.style.transform = 'translateX(-500px)';
+
+    requestAnimationFrame(() => {
+      track.style.transition = 'transform 0.5s ease-in-out';
+      track.style.transform = 'translateX(0)';
+    });
+
+    setTimeout(() => {
+      isSliding = false;
+    }, 500);
+  }
